@@ -9,9 +9,6 @@ new_data = []
 for i in range(len(data)):
     new_data.append([int(x) for x in data[i].split(",")])
 
-# new_data =[[131,673,234,103,18],[201,96,342,965,150],[630,803,746,422,111],
-#           [537,699,497,121,956], [805,732,524,37,331]]
-
 N = len(new_data)
 aux = new_data * 1
 
