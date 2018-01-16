@@ -1,5 +1,3 @@
-import numpy as np
-
 # Read matrix from the file:
 filename = "p082_matrix.txt"
 f = open(filename, "r")
