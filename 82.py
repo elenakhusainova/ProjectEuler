@@ -1,37 +1,23 @@
-filename = "p082_matrix.txt"
+import numpy as np
 
+# Read matrix from the file:
+filename = "p082_matrix.txt"
 f = open(filename, "r")
-data = f.readlines()
+data = [list(map(int, line.split(','))) for line in f]
 f.close()
 
-new_data = []
+N = len(data)
+aux = data[:] # Auxiliary matrix
 
-for i in range(len(data)):
-    new_data.append([int(x) for x in data[i].split(",")])
-
-N = len(new_data)
-aux = new_data * 1
-
-
-for col in range(N - 1, -1, -1):
-
-    column = []
-    for i in range(N):
-        column.append(aux[i][col])
-
-    for row in range(N - 1, -1, -1):
-        if col == N - 1:
-            aux[row][col] = aux[row][col]
-        else:
-            temp = aux[row][col] + aux[row][col + 1]
+for col in range(1, N + 1):
+    column = [aux[i][-col] for i in range(N)]
+    for row in range(N):
+        if col != 1:
+            temp = aux[row][-col] + aux[row][-col + 1]
             for i in range(N):
-                curr = sum(column[min(i, row): max(i, row) + 1]) + aux[i][col + 1]
+                curr = sum(column[min(i, row) : max(i, row) + 1]) + aux[i][-col + 1]
                 if (curr <= temp):
-                    aux[row][col] = curr
+                    aux[row][-col] = curr
                     temp = curr
 
-column = []
-for i in range(N):
-    column.append(aux[i][0])
-print(min(column))
-
+print(min([aux[i][0] for i in range(N)]))
